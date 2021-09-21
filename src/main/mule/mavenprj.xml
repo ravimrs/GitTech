@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="79f2f31f-45be-41aa-8fd8-50bbb5e261d7" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mavenprjFlow" doc:id="80bc13f5-ebc3-49ac-9558-3bc4b5fe5988" >
+		<http:listener doc:name="Listener" doc:id="e84801d2-666d-4a8d-8886-6b6a2563acdc" config-ref="HTTP_Listener_config" path="/mvn"/>
+		<logger level="INFO" doc:name="Logger" doc:id="824a53b1-cd25-4386-a624-f8b806d26040" message="Incoming message :: "/>
+		<set-payload value='#[{"Status" : "Hello" ++ payload.name ++ "." ++ "Welcome to Mule!"}]' doc:name="WelcomeMsg" doc:id="5ebed15d-d617-40c5-bec5-322dff9515ef" />
+	</flow>
+</mule>
